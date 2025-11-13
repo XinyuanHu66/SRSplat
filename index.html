@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG" />
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG" />
+  <meta property="og:url" content="URL OF THE WEBSITE" />
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>SRSplat</title>
+  <link rel="icon" href="./static/images/logo.png">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+  
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+
+<body>
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">SRSplat: Feed-Forward Super-Resolution Gaussian Splatting from 
+                  Sparse <br> Multi-View Images</h1>
+            <div class="is-size-5 publication-authors">
+              <div style="color: #f14668">Submit to AAAI 2026</div>
+              <!-- Paper authors -->
+              <span class="author-block">
+                <a href="" target="_blank">Anonymous Authors</a>
+              </span>
+              </span>
+              </span>
+            </div>
+
+
+            <!-- <div class="column has-text-centered">
+                    <div class="publication-links">
+                      <span class="link-block">
+                        <a href="" target="_blank"
+                        class="external-link button is-normal is-rounded is-outlined is-info">
+                        <span class="icon">
+                          <i class="fas fa-file-pdf"></i>
+                        </span>
+                        <span>Paper</span>
+                      </a>
+                    </span> -->
+
+                  <!-- <span class="link-block">
+                    <a href="" target="_blank"
+                    class="external-link button is-normal is-rounded is-outlined is-success">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span> -->
+
+                  <!-- <span class="link-block">
+                    <a href="https://github.com/SRSplat/SRSplat" target="_blank"
+                    class="external-link button is-normal is-rounded is-outlined is-primary">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+
+            <span class="link-block">
+              <a
+                href="https://huggingface.co/SRSplat/SRSplat"
+                target="_blank"
+                class="external-link button is-normal is-rounded is-outlined is-danger"
+              >
+                <span class="icon">
+                  <img
+                    src="https://huggingface.co/front/assets/huggingface_logo.svg"
+                    alt="Hugging Face"
+                    style="width:1em;height:1em;"
+                  />
+                </span>
+                <span>Weights</span>
+              </a>
+            </span> -->
+
+            </div>
+          </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+  <section class="section content-section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-12">
+          <h3 class="title is-3">👑 Abstract</h3>
+          <div class="has-text-justified">
+            <p>
+              Feed-forward 3D reconstruction from sparse, low-resolution (LR) images is a crucial 
+              capability for real-world applications, such as autonomous driving and embodied AI. 
+              However, existing methods often fail to recover fine texture details. This limitation 
+              stems from the inherent lack of high-frequency information in LR inputs. 
+              To address this, we propose <strong>SRSplat</strong>, a feed-forward framework that reconstructs 
+              high-resolution 3D scenes from only a few LR views. Our main insight is to compensate 
+              for the deficiency of texture information by jointly leveraging external high-quality 
+              reference images and internal texture cues. We first construct a scene-specific reference 
+              gallery, generated for each scene using Multimodal Large Language Models (MLLMs) and 
+              diffusion models. To integrate this external information, we introduce the 
+              Reference-Guided Feature Enhancement (RGFE) module, which aligns and fuses 
+              features from the LR input images and their reference twin image. Subsequently, 
+              we train a decoder to predict the Gaussian primitives using the multi-view fused feature 
+              obtained from RGFE. To further refine predicted Gaussian primitives, 
+              we introduce Texture-Aware Density Control (TADC), which adaptively adjusts 
+              Gaussian density based on the internal texture richness of the LR inputs. 
+              Extensive experiments demonstrate that our SRSplat outperforms existing methods on 
+              various datasets, including RealEstate10K, ACID, and DTU, and exhibits strong cross-dataset 
+              and cross-resolution generalization capabilities.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <h3 class="title is-3 has-text-centered">📺 Method Explanation  </h3>
+          <div style="display: flex; justify-content: center;">
+            <iframe width="1120" height="515" src="https://www.youtube.com/embed/7rZ7V-Monps?si=j9G4siJC7d20mA87" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h2 class="subtitle"
+              style="margin-top:32px; text-align:justify; text-align-last:left; line-height:1.5;">
+            🏃 We propose <strong>SRSplst</strong>, an Feed-Forward Super-Resolution framework from Sparse Multi-View Images
+            (YouTube Link:
+            <a href="https://youtu.be/7rZ7V-Monps?si=1qGm5t_Md3uXKmw8" target="_blank" rel="noopener noreferrer">Video</a>)
+          </h2>
+        </div>
+      </div>
+
+      <div class="container is-max-desktop">
+        <div class="hero-body">
+          <h3 class="title is-3 has-text-centered">📺 Video Demo</h3>
+          <div style="display: flex; justify-content: center;">
+            <iframe width="1120" height="515" src="https://www.youtube.com/embed/725pwqip7kE?si=AFFQtBfC-j5Yst0g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+          </div>
+          <h2 class="subtitle"
+              style="margin-top:32px; text-align:justify; text-align-last:left; line-height:1.5;">
+            <!-- 🏃 We propose <strong>REALM</strong>, an MLLM-Agent framework for 3D reasoning segmentation. -->
+            (Anonymous YouTube Link:
+            <a href="https://youtu.be/725pwqip7kE?si=Dq7bEYNcb9aGrqfH" target="_blank" rel="noopener noreferrer">Video</a>)
+          </h2>
+        </div>
+      </div>
+       
+
+
+      <div class="container is-max-desktop has-text-centered" style="margin-top:4rem;">
+      <h3 class="title is-3">🔧 Framework Overview</h3>
+
+      <figure class="image is-16by9" style="display: flex; justify-content: center;">
+        <img src="static/images/allpipline.png" alt="REALM Pipeline" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+      </figure>
+      <p class="subtitle is-5 has-text-justified"
+        style="margin-top: 3rem; margin-bottom: 5rem;">
+        In this work, we propose SRSplat, a novel feed-forward framework that reconstructs high-quality 3D scenes with only
+        sparse and LR input views. SRSplat demonstrates superior performance and is capable of handling low-resolution, sparse-view
+        inputs and real-time reconstruction, thereby offering greater functionality and practicality in realistic applications.
+      </p>
+        </div>
+
+
+
+
+    </div>
+  </section>
+
+
+      <!-- Pipeline Section -->
+  <!-- <section class="section">
+    <div class="container is-max-desktop has-text-centered">
+      <h3 class="title is-3">🔧 Framework Overview</h3>
+
+      <figure class="image is-16by9" style="display: flex; justify-content: center;">
+        <img src="static/images/allpipline.png" alt="REALM Pipeline" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+      </figure>
+      <p class="subtitle is-5 has-text-centered" style="margin-top: 3rem; margin-bottom: 5rem;">
+        TL;DR: REALM addresses a key challenge in 3D understanding-3D reasoning segmentation. REALM also supports language-guided 3D editing tasks includig removal, replacement and stylization.
+      </p>
+    </div>
+  </section> -->
+
+  
+
+    <!-- compare -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Visual Comparisons</title>
+  <style>
+    .dataset-name, .scene-tabs { width:512px; margin:0 auto; }
+    .dataset-name { font-size:20px; font-weight:600; margin-bottom:8px; }
+    .scene-tabs {
+      display:flex; overflow-x:auto; gap:8px;
+      padding-bottom:4px; margin-bottom:16px;
+      border-bottom:1px solid #ddd;
+    }
+    .scene-tab {
+      padding:6px 12px; border:1px solid #ccc;
+      border-radius:4px 4px 0 0; background:#fff;
+      cursor:pointer; white-space:nowrap;
+    }
+    .scene-tab.active {
+      background:#5a8f0d; color:#fff; border-color:#5a8f0d;
+    }
+    .comps {
+      display:flex; justify-content:center;
+      gap:2rem; flex-wrap:wrap;
+    }
+    .comp-container { margin-bottom:2rem; }
+    .comp-box {
+      position:relative; width:512px; aspect-ratio:1/1;
+      overflow:hidden; border-radius:8px;
+      user-select:none; touch-action:none;
+      margin:0 auto;
+    }
+    .comp-box .layer {
+      position:absolute; inset:0;
+      width:100%; height:100%; object-fit:cover;
+    }
+    .comp-line {
+      position:absolute; top:0; bottom:0;
+      width:2px; background:rgba(255,255,255,0.9); z-index:5;
+    }
+    .comp-thumb {
+      position:absolute; top:50%;
+      transform:translate(-50%,-50%);
+      width:32px; height:32px; background:#fff;
+      border:2px solid #333; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:18px; color:#333; cursor:ew-resize; z-index:6;
+    }
+    .comp-thumb:active { box-shadow:0 0 6px rgba(0,0,0,0.6); }
+    .comp-label {
+      position:absolute; bottom:12px; padding:4px 8px;
+      background:rgba(255,255,255,0.85); border-radius:4px;
+      font-size:14px; color:#333; transform:translateX(-50%);
+      pointer-events:none; z-index:7; white-space:nowrap;
+    }
+    .comp-input {
+      position:absolute; top:8px;
+      width:80px; height:80px; object-fit:cover;
+      border:2px solid rgba(255,255,255,0.9);
+      border-radius:6px; z-index:8;
+    }
+  </style>
+</head>
+<body>
+
+<section class="section">
+  <div class="container has-text-centered">
+    <h3 class="title is-3">🆚 Visual Comparisons</h3>
+    <div class="comps">
+      <!-- Block 1 -->
+      <div class="comp-container">
+        <div class="dataset-name">RealEstate10K Dataset</div>
+        <div id="tabs1" class="scene-tabs"></div>
+        <div id="comp1" class="comp-box" data-v1="30" data-v2="70">
+          <img id="comp1-before" class="layer" alt>
+          <img id="comp1-ours"   class="layer" alt>
+          <img id="comp1-gt"     class="layer" alt>
+          <div id="comp1-line1"  class="comp-line"></div>
+          <div id="comp1-line2"  class="comp-line"></div>
+          <div id="comp1-thumb1" class="comp-thumb">⇆</div>
+          <div id="comp1-thumb2" class="comp-thumb">⇆</div>
+          <div id="comp1-label1" class="comp-label">MVSplat</div>
+          <div id="comp1-label2" class="comp-label">Ours</div>
+          <div id="comp1-label3" class="comp-label">GT</div>
+          <img id="comp1-input1" class="comp-input" alt="Input 1"
+               style="right:calc(16px + 70px + 7px);">
+          <img id="comp1-input2" class="comp-input" alt="Input 2"
+               style="right:7px;">
+        </div>
+      </div>
+
+      <!-- Block 2 -->
+      <div class="comp-container">
+        <div class="dataset-name">ACID Dataset</div>
+        <div id="tabs2" class="scene-tabs"></div>
+        <div id="comp2" class="comp-box" data-v1="30" data-v2="70">
+          <img id="comp2-before" class="layer" alt>
+          <img id="comp2-ours"   class="layer" alt>
+          <img id="comp2-gt"     class="layer" alt>
+          <div id="comp2-line1"  class="comp-line"></div>
+          <div id="comp2-line2"  class="comp-line"></div>
+          <div id="comp2-thumb1" class="comp-thumb">⇆</div>
+          <div id="comp2-thumb2" class="comp-thumb">⇆</div>
+          <div id="comp2-label1" class="comp-label">MVSplat</div>
+          <div id="comp2-label2" class="comp-label">Ours</div>
+          <div id="comp2-label3" class="comp-label">GT</div>
+          <img id="comp2-input1" class="comp-input" alt="Input 1"
+               style="right:calc(16px + 70px + 7px);">
+          <img id="comp2-input2" class="comp-input" alt="Input 2"
+               style="right:7px;">
+        </div>
+      </div>
+    </div>
+
+        <div style="text-align:center; margin-top:24px;">
+
+      <img
+        src="static/images/compare.png"
+        alt="Overall Difference"
+        style="max-width:900px; width:100%; border:1px solid #ccc; border-radius:4px;"
+      >
+    </div>
+
+
+  </div>
+</section>
+
+<script>
+  const scenes1 = ['scene1','scene2','scene3','scene4','scene5','scene6'];
+  const scenes2 = ['scene1','scene2','scene3','scene4','scene5','scene6'];
+
+  function initTabs(tabId, compId, hasInputs, sceneList, folder) {
+    const tabs = document.getElementById(tabId);
+    tabs.innerHTML = '';
+    sceneList.forEach(name => {
+      const btn = document.createElement('div');
+      btn.className = 'scene-tab';
+      btn.textContent = name;
+      btn.onclick = () =>
+        switchScene(name, tabId, compId, hasInputs, folder, btn);
+      tabs.appendChild(btn);
+    });
+    // 默认第一个
+    switchScene(sceneList[0], tabId, compId, hasInputs, folder, tabs.firstChild);
+  }
+
+  function switchScene(scene, tabId, compId, hasInputs, folder, activeBtn) {
+    document.querySelectorAll(`#${tabId} .scene-tab`)
+      .forEach(t => t.classList.remove('active'));
+    activeBtn.classList.add('active');
+
+    document.getElementById(`${compId}-before`).src =
+      `static/images/compare/${folder}/${scene}_mvs.png`;
+    document.getElementById(`${compId}-ours`).src   =
+      `static/images/compare/${folder}/${scene}_ours.png`;
+    document.getElementById(`${compId}-gt`).src     =
+      `static/images/compare/${folder}/${scene}_gt.png`;
+
+    if (hasInputs) {
+      document.getElementById(`${compId}-input1`).src =
+        `static/images/compare/${folder}/${scene}_input1.png`;
+      document.getElementById(`${compId}-input2`).src =
+        `static/images/compare/${folder}/${scene}_input2.png`;
+    }
+
+    // 保持每次切换都重新 bindCompare
+    const box = document.getElementById(compId);
+    box.dataset.v1 = 30;
+    box.dataset.v2 = 70;
+    bindCompare(compId);
+  }
+
+  function bindCompare(id) {
+    const box = document.getElementById(id);
+    const t1  = document.getElementById(id + '-thumb1');
+    const t2  = document.getElementById(id + '-thumb2');
+    const l1  = document.getElementById(id + '-line1');
+    const l2  = document.getElementById(id + '-line2');
+    const o   = document.getElementById(id + '-ours');
+    const g   = document.getElementById(id + '-gt');
+    const lb1 = document.getElementById(id + '-label1');
+    const lb2 = document.getElementById(id + '-label2');
+    const lb3 = document.getElementById(id + '-label3');
+    let v1 = +box.dataset.v1, v2 = +box.dataset.v2, active = null, threshold = 10;
+
+    function update() {
+      if (v1 > v2) [v1, v2] = [v2, v1];
+      o.style.clipPath = `inset(0 ${100 - v2}% 0 ${v1}%)`;
+      g.style.clipPath = `inset(0 0 0 ${v2}%)`;
+      l1.style.left = `${v1}%`;   t1.style.left = `${v1}%`;
+      l2.style.left = `${v2}%`;   t2.style.left = `${v2}%`;
+      const r1 = v1, r2 = v2 - v1, r3 = 100 - v2;
+      lb1.style.left = `${r1/2}%`;
+      lb2.style.left = `${v1+r2/2}%`;
+      lb3.style.left = `${v2+r3/2}%`;
+      lb1.style.display = r1 < threshold ? 'none' : 'block';
+      lb2.style.display = r2 < threshold ? 'none' : 'block';
+      lb3.style.display = r3 < threshold ? 'none' : 'block';
+    }
+
+    function onDown(which, e) {
+      e.preventDefault();
+      active = which;
+      box.setPointerCapture(e.pointerId);
+    }
+    function onMove(e) {
+      if (!active) return;
+      const rect = box.getBoundingClientRect();
+      let pct = ((e.clientX - rect.left)/rect.width)*100;
+      pct = Math.max(0, Math.min(100, pct));
+      active===1? v1=pct : v2=pct;
+      update();
+    }
+    function onUp(e) {
+      active = null;
+      box.releasePointerCapture(e.pointerId);
+    }
+
+    t1.addEventListener('pointerdown', e=>onDown(1,e));
+    t2.addEventListener('pointerdown', e=>onDown(2,e));
+    box.addEventListener('pointermove', onMove);
+    box.addEventListener('pointerup', onUp);
+    box.addEventListener('pointercancel', onUp);
+
+    update();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    initTabs('tabs1','comp1', true,  scenes1, 'RealEstate10K');
+    initTabs('tabs2','comp2', true,  scenes2, 'ACID');
+  });
+</script>
+
+
+      <!-- REF -->
+      <div class="hero-body teaser">
+        <div class="container">
+          <h3 class="title is-3 has-text-centered">⛰️ More Reference twin on ACID Dataset</h3>
+          <div id="results-carousel" class="results-carousel">
+      
+            <!-- 1 -->
+            <div class="item">
+              <div style="display:flex;justify-content:center;gap:32px;flex-wrap:nowrap;margin-bottom:2rem;">
+
+                <!-- 左：LR image -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image-ac1-1-downup.png"
+                        alt="LR image"
+                        style="width:256px;height:256px;object-fit:cover;display:block;image-rendering:crisp-edges;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">LR image</div>
+                </div>
+
+                <!-- 右：Reference twin -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image-ac1-2.png"
+                        alt="Reference twin"
+                        style="width:256px;height:256px;object-fit:cover;display:block;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">Reference twin</div>
+                </div>
+
+              </div>
+            </div>
+      
+            <!-- 2 -->
+            <div class="item">
+              <div style="display:flex;justify-content:center;gap:32px;flex-wrap:nowrap;margin-bottom:2rem;">
+
+                <!-- 左：LR image -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image-ac2-1-downup.png"
+                        alt="LR image"
+                        style="width:256px;height:256px;object-fit:cover;display:block;image-rendering:crisp-edges;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">LR image</div>
+                </div>
+
+                <!-- 右：Reference twin -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image-ac2-2.png"
+                        alt="Reference twin"
+                        style="width:256px;height:256px;object-fit:cover;display:block;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">Reference twin</div>
+                </div>
+
+              </div>
+            </div>
+      
+            <!-- 3 -->
+            <div class="item">
+              <div style="display:flex;justify-content:center;gap:32px;flex-wrap:nowrap;margin-bottom:2rem;">
+
+                <!-- 左：LR image -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image-ac3-1-downup.png"
+                        alt="LR image"
+                        style="width:256px;height:256px;object-fit:cover;display:block;image-rendering:crisp-edges;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">LR image</div>
+                </div>
+
+                <!-- 右：Reference twin -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image-ac3-2.png"
+                        alt="Reference twin"
+                        style="width:256px;height:256px;object-fit:cover;display:block;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">Reference twin</div>
+                </div>
+
+              </div>
+            </div>
+      
+            <!-- 4 -->
+            <div class="item">
+              <div style="display:flex;justify-content:center;gap:32px;flex-wrap:nowrap;margin-bottom:2rem;">
+
+                <!-- 左：LR image -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image-ac4-1-downup.png"
+                        alt="LR image"
+                        style="width:256px;height:256px;object-fit:cover;display:block;image-rendering:crisp-edges;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">LR image</div>
+                </div>
+
+                <!-- 右：Reference twin -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image-ac4-2.png"
+                        alt="Reference twin"
+                        style="width:256px;height:256px;object-fit:cover;display:block;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">Reference twin</div>
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="item">
+              <div style="display:flex;justify-content:center;gap:32px;flex-wrap:nowrap;margin-bottom:2rem;">
+
+                <!-- 左：LR image -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image-ac5-1-downup.png"
+                        alt="LR image"
+                        style="width:256px;height:256px;object-fit:cover;display:block;image-rendering:crisp-edges;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">LR image</div>
+                </div>
+
+                <!-- 右：Reference twin -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image-ac5-2.png"
+                        alt="Reference twin"
+                        style="width:256px;height:256px;object-fit:cover;display:block;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">Reference twin</div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="item">
+              <div style="display:flex;justify-content:center;gap:32px;flex-wrap:nowrap;margin-bottom:2rem;">
+
+                <!-- 左：LR image -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image-ac6-1-downup.png"
+                        alt="LR image"
+                        style="width:256px;height:256px;object-fit:cover;display:block;image-rendering:crisp-edges;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">LR image</div>
+                </div>
+
+                <!-- 右：Reference twin -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image-ac6-2.png"
+                        alt="Reference twin"
+                        style="width:256px;height:256px;object-fit:cover;display:block;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">Reference twin</div>
+                </div>
+
+              </div>
+            </div>
+            <div class="item">
+              <div style="display:flex;justify-content:center;gap:32px;flex-wrap:nowrap;margin-bottom:2rem;">
+
+                <!-- 左：LR image -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image-ac7-1-downup.png"
+                        alt="LR image"
+                        style="width:256px;height:256px;object-fit:cover;display:block;image-rendering:crisp-edges;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">LR image</div>
+                </div>
+
+                <!-- 右：Reference twin -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image-ac7-2.png"
+                        alt="Reference twin"
+                        style="width:256px;height:256px;object-fit:cover;display:block;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">Reference twin</div>
+                </div>
+
+              </div>
+            </div>
+      
+
+            <div class="item">
+              <div style="display:flex;justify-content:center;gap:32px;flex-wrap:nowrap;margin-bottom:2rem;">
+
+                <!-- 左：LR image -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image-ac8-1-downup.png"
+                        alt="LR image"
+                        style="width:256px;height:256px;object-fit:cover;display:block;image-rendering:crisp-edges;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">LR image</div>
+                </div>
+
+                <!-- 右：Reference twin -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image-ac8-2.png"
+                        alt="Reference twin"
+                        style="width:256px;height:256px;object-fit:cover;display:block;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">Reference twin</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- 添加间距 -->
+          <div style="margin-bottom: 4rem;"></div>
+
+
+          <h3 class="title is-3 has-text-centered">🏠 More Reference twin on RealEstate10K Dataset</h3>
+          <div id="results-carousel" class="results-carousel">
+      
+            <!-- 1 -->
+            <div class="item">
+              <div style="display:flex;justify-content:center;gap:32px;flex-wrap:nowrap;margin-bottom:2rem;">
+
+                <!-- 左：LR image -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image1-1-down.png"
+                        alt="LR image"
+                        style="width:256px;height:256px;object-fit:cover;display:block;image-rendering:crisp-edges;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">LR image</div>
+                </div>
+
+                <!-- 右：Reference twin -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image1-2.png"
+                        alt="Reference twin"
+                        style="width:256px;height:256px;object-fit:cover;display:block;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">Reference twin</div>
+                </div>
+
+              </div>
+            </div>
+      
+            <!-- 2 -->
+            <div class="item">
+              <div style="display:flex;justify-content:center;gap:32px;flex-wrap:nowrap;margin-bottom:2rem;">
+
+                <!-- 左：LR image -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image2-1-downup.png"
+                        alt="LR image"
+                        style="width:256px;height:256px;object-fit:cover;display:block;image-rendering:crisp-edges;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">LR image</div>
+                </div>
+
+                <!-- 右：Reference twin -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image2-2.png"
+                        alt="Reference twin"
+                        style="width:256px;height:256px;object-fit:cover;display:block;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">Reference twin</div>
+                </div>
+
+              </div>
+            </div>
+      
+            <!-- 3 -->
+            <div class="item">
+              <div style="display:flex;justify-content:center;gap:32px;flex-wrap:nowrap;margin-bottom:2rem;">
+
+                <!-- 左：LR image -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image3-1-downup.png"
+                        alt="LR image"
+                        style="width:256px;height:256px;object-fit:cover;display:block;image-rendering:crisp-edges;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">LR image</div>
+                </div>
+
+                <!-- 右：Reference twin -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image3-2.png"
+                        alt="Reference twin"
+                        style="width:256px;height:256px;object-fit:cover;display:block;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">Reference twin</div>
+                </div>
+
+              </div>
+            </div>
+      
+            <!-- 4 -->
+            <div class="item">
+              <div style="display:flex;justify-content:center;gap:32px;flex-wrap:nowrap;margin-bottom:2rem;">
+
+                <!-- 左：LR image -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image4-1-downup.png"
+                        alt="LR image"
+                        style="width:256px;height:256px;object-fit:cover;display:block;image-rendering:crisp-edges;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">LR image</div>
+                </div>
+
+                <!-- 右：Reference twin -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image4-2.png"
+                        alt="Reference twin"
+                        style="width:256px;height:256px;object-fit:cover;display:block;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">Reference twin</div>
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="item">
+              <div style="display:flex;justify-content:center;gap:32px;flex-wrap:nowrap;margin-bottom:2rem;">
+
+                <!-- 左：LR image -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image5-1-downup.png"
+                        alt="LR image"
+                        style="width:256px;height:256px;object-fit:cover;display:block;image-rendering:crisp-edges;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">LR image</div>
+                </div>
+
+                <!-- 右：Reference twin -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image5-2.png"
+                        alt="Reference twin"
+                        style="width:256px;height:256px;object-fit:cover;display:block;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">Reference twin</div>
+                </div>
+
+              </div>
+            </div>
+
+            <div class="item">
+              <div style="display:flex;justify-content:center;gap:32px;flex-wrap:nowrap;margin-bottom:2rem;">
+
+                <!-- 左：LR image -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image6-1-downup.png"
+                        alt="LR image"
+                        style="width:256px;height:256px;object-fit:cover;display:block;image-rendering:crisp-edges;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">LR image</div>
+                </div>
+
+                <!-- 右：Reference twin -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image6-2.png"
+                        alt="Reference twin"
+                        style="width:256px;height:256px;object-fit:cover;display:block;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">Reference twin</div>
+                </div>
+
+              </div>
+            </div>
+            <div class="item">
+              <div style="display:flex;justify-content:center;gap:32px;flex-wrap:nowrap;margin-bottom:2rem;">
+
+                <!-- 左：LR image -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image7-1-downup.png"
+                        alt="LR image"
+                        style="width:256px;height:256px;object-fit:cover;display:block;image-rendering:crisp-edges;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">LR image</div>
+                </div>
+
+                <!-- 右：Reference twin -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image7-2.png"
+                        alt="Reference twin"
+                        style="width:256px;height:256px;object-fit:cover;display:block;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">Reference twin</div>
+                </div>
+
+              </div>
+            </div>
+      
+
+            <div class="item">
+              <div style="display:flex;justify-content:center;gap:32px;flex-wrap:nowrap;margin-bottom:2rem;">
+
+                <!-- 左：LR image -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image8-1-downup.png"
+                        alt="LR image"
+                        style="width:256px;height:256px;object-fit:cover;display:block;image-rendering:crisp-edges;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">LR image</div>
+                </div>
+
+                <!-- 右：Reference twin -->
+                <div style="text-align:center;flex:0 0 auto;">
+                    <img src="static/images/image8-2.png"
+                        alt="Reference twin"
+                        style="width:256px;height:256px;object-fit:cover;display:block;">
+                  </a>
+                  <div style="margin-top:6px;font-size:18px;color:#000000;">Reference twin</div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+
+<section class="section">
+  <div style="max-width:1400px;padding:0 60px;margin:0 auto;text-align:center;">
+    <h3 class="title is-3">🖼️ HR Novel View Synthesis</h3>
+
+    <div style="
+      display:grid;
+      grid-template-columns:repeat(5, 160px);  /* 一行 5 个，小一点就调这个值 */
+      column-gap:8px;   /* 列间距 */
+      row-gap:14px;      /* 行间距（两行之间）*/
+      justify-content:center;
+      margin:0 auto;
+    ">
+
+      <!-- 单个视频块：复制这段改 src 即可 -->
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/1-1.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+
+      <!-- 更多视频…… -->
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/1-2.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/1-3.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/1-4.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/1-5.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/2-1.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/2-2.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/2-3.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/2-4.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/2-5.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/3-1.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/3-2.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/3-3.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/3-4.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/3-5.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/4-1.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+
+
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/4-2.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/4-3.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+
+
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/4-4.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+
+      <div style="width:160px;height:160px;border-radius:12px;overflow:hidden;">
+        <video src="static/videos/4-5.mp4"
+               autoplay muted loop playsinline webkit-playsinline preload="metadata"
+               style="width:100%;height:100%;object-fit:cover;display:block;">
+        </video>
+      </div>
+      <!-- 继续复制 -->
+    </div>
+  </div>
+</section>
+
+
+  <!-- Video carousel -->
+  <!-- <section class="hero is-small">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title is-3">Another Carousel</h2>
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <video poster="" id="video1" autoplay controls muted loop height="100%">
+            <source src="static/videos/carousel1.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-video2">
+          <video poster="" id="video2" autoplay controls muted loop height="100%">
+            <source src="static/videos/carousel2.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-video3">
+          <video poster="" id="video3" autoplay controls muted loop height="100%">\
+            <source src="static/videos/carousel3.mp4"
+            type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+  <!-- End video carousel -->
+
+
+  <!-- Paper poster -->
+  <!-- <section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container">
+      <h2 class="title">Poster</h2>
+
+      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
+          </iframe>
+        
+      </div>
+    </div>
+  </section> -->
+  <!--End paper poster -->
+
+
+  <!--BibTex citation -->
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code></code></pre>
+    </div>
+  </section>
+  <!--End BibTex citation -->
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+
+            <p>
+              This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template"
+                target="_blank">Academic Project Page Template</a> which was adopted from the <a
+                href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+              You are free to borrow the source code of this website, we just ask that you link back to this page in the
+              footer. <br> This website is licensed under a <a rel="license"
+                href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+                Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Statcounter tracking code -->
+
+  <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+  <!-- End of Statcounter Code -->
+
+</body>
+
+</html>
